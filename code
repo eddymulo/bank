@@ -1,3 +1,34 @@
+ssh -- ssh-keygen == public + prviate
+public key to be shared ssh-copy-id username@ip-address
+whenerver other machne want to connect == public and master will evaluvate with pvt key 
+configuration on master:
+========================
+login as jenkinsadmin on your master machine
+
+useradd jenkinsadmin
+passwd jenkinsadmin = pass123
+
+jenkinsadmin  ALL=(ALL)       NOPASSWD: ALL
+cd /etc/ssh - nano sshd_config == > PasswordAuthentication yes
+service sshd reload/service sshd restart
+su jenkinsadmin 
+
+configuration on slave:
+========================
+login as jenkinsadmin on your slave machine
+
+useradd jenkinsadmin
+passwd jenkinsadmin = pass123
+
+visudo == jenkinsadmin ALL=(ALL)       ALL
+cd /etc/ssh - nano sshd_config == > PasswordAuthentication yes
+service sshd reload/service sshd restart
+su jenkinsadmin 
+
+ssh 'jenkinsadmin@172.31.81.110'
+
+
+///////////////////////////////////////////////////////
 Take Amazon-linux-2023 latest version and install java + jenkins + maven 
 ========================================================================
 1. Upgrade your system (optional - If available)
