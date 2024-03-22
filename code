@@ -170,3 +170,54 @@ Create a new java - maven web app project using on jenkins server :
 mvn archetype:generate -DgroupId=com.sample.webproject -DartifactId=SampleWebApp -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 
 Once the files are created push them to new github repository
+///////////////////////////////////////////////////////////////////////////Class 22- https://tomcat.apache.org/download-10.cgi TOMCAT
+1. Spin a EC2 instance and login .
+Become a root user
+
+2. Install Java : sudo dnf install java-11-amazon-corretto-devel
+
+3. Install tomcat :
+cd /opt
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.zip
+unzip apache-tomcat-9.0.85.zip
+rm -rf apache-tomcat-9.0.85.zip
+mv apache-tomcat-9.0.85 tomact
+
+cd tomcat/bin
+chmod +x startup.sh
+chmod +x shutdown.sh
+chmod 777 catalina.sh
+
+./shutdown.sh
+./startup.sh
+chown -R ec2-user:ec2-user tomcat
+
+check your machine on port <public-ip>:8080
+find / -name context.xml
+nano /opt/tomcat/conf/context.xml
+nano /opt/tomcat/webapps/examples/META-INF/context.xml
+nano /opt/tomcat/webapps/host-manager/META-INF/context.xml
+nano /opt/tomcat/webapps/manager/META-INF/context.xml
+cd ..
+cd conf/
+nano tomcat-users.xml
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="tomcat" password="pass123" roles="manager-gui"/>
+<user username="admin" password="admin123" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+
+./shutdown.sh
+./startup.sh ==> Tomcat should be up and running.
+
+
+===============================================================
+Create a new java - maven web app project using on jenkins server :
+
+
+mvn archetype:generate -DgroupId=com.sample.webproject -DartifactId=SampleWebApp -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+Once the files are created push them to new github repository
+///////////////////////////////////////////////////////////////////////////
